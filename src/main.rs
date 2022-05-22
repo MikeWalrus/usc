@@ -1,6 +1,9 @@
 #![feature(let_chains)]
-use std::{io::{BufRead, stdin}, collections::HashMap};
-use unicode_script::{UnicodeScript, Script};
+use std::{
+    collections::HashMap,
+    io::{stdin, BufRead},
+};
+use unicode_script::{Script, UnicodeScript};
 
 fn main() {
     count(stdin().lock());
@@ -15,6 +18,7 @@ fn count<R: BufRead>(mut r: R) {
             let count = script_count.entry(script).or_insert(0);
             *count += 1;
         }
+        buf.clear();
     }
     for (script, count) in script_count {
         println!("{script}\t{count}")
